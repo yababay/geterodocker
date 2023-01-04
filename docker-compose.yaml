@@ -1,0 +1,63 @@
+version: "3.9"
+
+services:
+  nginx:
+    image: yababay/hello:nginx
+    build: ./nginx  
+    ports: 
+      - 8080:80
+    networks:
+      yababay-network:
+        ipv4_address: 192.168.67.10
+
+  csharp:
+    image: yababay/hello:csharp
+    build: ./csharp  
+    ports: 
+      - 8081:8081
+    networks:
+      yababay-network:
+        ipv4_address: 192.168.67.11
+
+  java:
+    image: yababay/hello:java
+    build: ./java  
+    ports: 
+      - 8082:8080
+    networks:
+      yababay-network:
+        ipv4_address: 192.168.67.12
+
+  nodejs:
+    image: yababay/hello:nodejs
+    build: ./nodejs  
+    ports: 
+      - 8083:8083
+    networks:
+      yababay-network:
+        ipv4_address: 192.168.67.13
+
+  python:
+    image: yababay/hello:python
+    build: ./python
+    ports: 
+      - 8084:8084
+    networks:
+      yababay-network:
+        ipv4_address: 192.168.67.14
+
+  debug:
+    image: yababay/hello:debug
+    build: ./debug
+    networks:
+      yababay-network:
+        ipv4_address: 192.168.67.15
+
+networks:
+  yababay-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.67.0/24
+          gateway: 192.168.67.67
+
